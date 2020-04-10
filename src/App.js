@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import ImagesGrid from "./components/ImagesGrid";
 import Loader from "./components/Loader";
+import NoImages from "./components/NoImages";
+import SearchForm from "./components/SearchForm";
+import ImagesGrid from "./components/ImagesGrid";
 
 function App() {
   // App level state
@@ -20,7 +22,7 @@ function App() {
         console.error(error);
         setIsLoading(true);
       });
-  }, [query, images, isLoading]);
+  }, [query]);
 
 
   return (
@@ -29,9 +31,19 @@ function App() {
         <h1 className="font-semibold text-6xl capitalize">React Gallery</h1>
         <p className="text-gray-700">A gallery of photos made possible thanks to Pixabay APIs</p>
       </div>
+
       {isLoading
         ? <Loader />
-        : <ImagesGrid images={images} />
+        :
+        <div>
+          <div className="mb-4 w-full">
+            <SearchForm searchText={text => setQuery(text)} />
+          </div>
+          {images.length > 0
+            ? <ImagesGrid images={images} />
+            : <NoImages />
+          }
+        </div>
       }
     </div>
   );
