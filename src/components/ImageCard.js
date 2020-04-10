@@ -9,7 +9,7 @@ const ImageCard = ({ image }) => {
   const tags = image.tags.split(",");
 
   return (
-    <div className="rounded overflow-hidden shadow-sm border border-gray-100">
+    <div className="rounded overflow-hidden shadow-sm border border-gray-200">
       <div className="flex flex-col  h-full justify-between">
         <img
           src={image.webformatURL}
