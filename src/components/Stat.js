@@ -1,11 +1,12 @@
 import React from "react";
+import Icon from "./Icon";
 
-const Stat = ({ name, value }) => {
+const Stat = ({ icon, name, value }) => {
   return (
-    <li>
-      <span className="font-semibold capitalize">{name}</span>
-      <span>{value}</span>
-    </li>
+    <div className="text-sm mr-4" title={name}>
+      <Icon icon={icon} className="text-gray-600" />
+      <span className="ml-1 text-gray-700">{value}</span>
+    </div>
   );
 };
 
