@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ImageCard from "./components/ImageCard";
+import ImagesGrid from "./components/ImagesGrid";
+import Loader from "./components/Loader";
 
 function App() {
   // App level state
@@ -15,18 +16,23 @@ function App() {
         setImages(data.hits);
         setIsLoading(false);
       })
-      .catch(error => console.error(error));
+      .catch(error => {
+        console.error(error);
+        setIsLoading(true);
+      });
   }, [query, images, isLoading]);
 
 
   return (
     <div className="container mx-auto">
-      <div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {images.map(image => (
-          <ImageCard key={image.id} image={image} />
-        ))}
+      <div className="mb-10">
+        <h1 className="font-semibold text-6xl capitalize">React Gallery</h1>
+        <p className="text-gray-700">A gallery of photos made possible thanks to Pixabay APIs</p>
       </div>
+      {isLoading
+        ? <Loader />
+        : <ImagesGrid images={images} />
+      }
     </div>
   );
 }
